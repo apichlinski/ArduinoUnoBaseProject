@@ -15,7 +15,8 @@ env:
      - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
      - TRAVIS_BUILD_NUMBER="0.0.1"
      - TRAVIS_COMMIT="Testing commit"
-     - GH_REPO_TOKEN="apichlinski/ArduinoUnoBaseProject"
+     - GH_REPO_TOKEN="git"
+     - TRAVIS_REPO_SLUG="apichlinski/ArduinoUnoBaseProject"
 
 before_install:
    - source $TRAVIS_BUILD_DIR/install.sh
