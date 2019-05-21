@@ -1,0 +1,49 @@
+language: c
+sudo: false
+cache:
+  directories:
+    - ~/arduino_ide
+    - ~/.arduino15/packages/
+git:
+  depth: false
+  quiet: true
+before_install:
+  - source $TRAVIS_BUILD_DIR/install.sh
+script:
+  - build_platform uno
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+
+
+language: c
+sudo: false
+cache:
+  directories:
+    - ~/arduino_ide
+    - ~/.arduino15/packages/
+git:
+  depth: false
+  quiet: true
+env:
+  global:
+     - ARDUINO_IDE_VERSION="1.8.7"
+     - PRETTYNAME="Adafruit FT6206 Arduino Library"
+# Optional, will default to "$TRAVIS_BUILD_DIR/Doxyfile"
+     - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+
+before_install:
+   - source $TRAVIS_BUILD_DIR/install.sh
+
+install:
+   - arduino --install-library "Adafruit ILI9341","Adafruit GFX Library"
+
+script:
+   - build_main_platforms
+
+# Generate and deploy documentation
+after_success:
+  - $TRAVIS_BUILD_DIR/library_check.sh
+  - $TRAVIS_BUILD_DIR/doxy_gen_and_deploy.sh
