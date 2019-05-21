@@ -1,1 +1,1 @@
-![Build Status](https://circleci.com/gh/apichlinski/ArduinoUnoBaseProject.svg?style=shield&circle-token=:circle-token)
+[![Build Status](https://travis-ci.org/apichlinski/ArduinoUnoBaseProject.svg?branch=master)](https://travis-ci.org/apichlinski/ArduinoUnoBaseProject)
