@@ -7,8 +7,8 @@ __AUTHOR__="Jeroen de Bruijn, modified by ladyada"
 # Preconditions:
 # - Doxygen configuration file must have the destination directory empty and
 #   source code directory with a $(TRAVIS_BUILD_DIR) prefix.
-# - An origin branch should already exist. See below for mor info on hoe to
-#   create a origin branch.
+# - An master branch should already exist. See below for mor info on hoe to
+#   create a master branch.
 #
 # Required global variables:
 # - TRAVIS_BUILD_NUMBER : The number of the current build.
@@ -22,18 +22,18 @@ __AUTHOR__="Jeroen de Bruijn, modified by ladyada"
 # For information on how to encrypt variables for Travis CI please go to
 # https://docs.travis-ci.com/user/environment-variables/#Encrypted-Variables
 # or https://gist.github.com/vidavidorra/7ed6166a46c537d3cbd2
-# For information on how to create a clean origin branch from the master
+# For information on how to create a clean master branch from the master
 # branch, please go to https://gist.github.com/vidavidorra/846a2fc7dd51f4fe56a0
 #
 # This script will generate Doxygen documentation and push the documentation to
-# the origin branch of a repository
-# Before this script is used there should already be a origin branch in the
+# the master branch of a repository
+# Before this script is used there should already be a master branch in the
 # repository.
 #
 ################################################################################
 
 ################################################################################
-##### Setup this script and get the current origin branch.               #####
+##### Setup this script and get the current master branch.               #####
 echo 'Setting up the script...'
 # Exit with nonzero exit code if anything fails
 set -e
@@ -50,8 +50,8 @@ chmod +x doxygen
 mkdir code_docs
 cd code_docs
 
-# Get the current origin branch
-git clone -b origin https://github.com/${TRAVIS_REPO_SLUG}.git
+# Get the current master branch
+git clone -b master https://github.com/${TRAVIS_REPO_SLUG}.git
 export TRAVIS_REPO_NAME=${TRAVIS_REPO_SLUG#*/}
 cd ${TRAVIS_REPO_NAME}
 
@@ -62,9 +62,9 @@ git config --global push.default simple
 git config user.name "Travis CI"
 git config user.email "travis@travis-ci.org"
 
-# Remove everything currently in the origin branch.
+# Remove everything currently in the master branch.
 # GitHub is smart enough to know which files have changed and which files have
-# stayed the same and will only update the changed files. So the origin branch
+# stayed the same and will only update the changed files. So the master branch
 # can be safely cleaned, and it is sure that everything pushed later is the new
 # documentation.
 # If there's no index.html (forwarding stub) grab our default one
@@ -78,7 +78,7 @@ else
 fi
 
 # Need to create a .nojekyll file to allow filenames starting with an underscore
-# to be seen on the origin site. Therefore creating an empty .nojekyll file.
+# to be seen on the master site. Therefore creating an empty .nojekyll file.
 # Presumably this is only needed when the SHORT_NAMES option in Doxygen is set
 # to NO, which it is by default. So creating the file just in case.
 echo "" > .nojekyll
@@ -123,15 +123,15 @@ fi
 cd code_docs/${TRAVIS_REPO_NAME}
 
 ################################################################################
-##### Upload the documentation to the origin branch of the repository.   #####
+##### Upload the documentation to the master branch of the repository.   #####
 # Only upload if Doxygen successfully created the documentation.
 # Check this by verifying that the html directory and the file html/index.html
 # both exist. This is a good indication that Doxygen did it's work.
 if [ -d "html" ] && [ -f "html/index.html" ]; then
 
-    echo 'Uploading documentation to the origin branch...'
+    echo 'Uploading documentation to the master branch...'
     # Add everything in this directory (the Doxygen code documentation) to the
-    # origin branch.
+    # master branch.
     # GitHub is smart enough to know which files have changed and which files have
     # stayed the same and will only update the changed files.
     echo 'Adding all files'
@@ -149,7 +149,7 @@ if [ -d "html" ] && [ -f "html/index.html" ]; then
     echo 'Git committing'
     git commit -m "Deploy code docs to GitHub Pages Travis build: ${TRAVIS_BUILD_NUMBER}" -m "Commit: ${TRAVIS_COMMIT}"
 
-    # Force push to the remote origin branch.
+    # Force push to the remote master branch.
     # The ouput is redirected to /dev/null to hide any sensitive credential data
     # that might otherwise be exposed.
     echo 'Git pushing'
