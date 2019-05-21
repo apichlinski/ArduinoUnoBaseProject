@@ -45,5 +45,5 @@ script:
 
 # Generate and deploy documentation
 after_success:
-  - $TRAVIS_BUILD_DIR/library_check.sh
-  - $TRAVIS_BUILD_DIR/doxy_gen_and_deploy.sh
+  - source $TRAVIS_BUILD_DIR/library_check.sh
+  - source $TRAVIS_BUILD_DIR/doxy_gen_and_deploy.sh
