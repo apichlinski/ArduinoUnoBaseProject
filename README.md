@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/apichlinski/ArduinoUnoBaseProject.svg?branch=master)](https://travis-ci.org/apichlinski/ArduinoUnoBaseProject)
+# Base Arduino project for Travis CI [![Build Status](https://travis-ci.org/apichlinski/ArduinoUnoBaseProject.svg?branch=master)](https://travis-ci.org/apichlinski/ArduinoUnoBaseProject)
