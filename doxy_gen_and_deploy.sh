@@ -1,9 +1,9 @@
 #!/bin/bash
 ################################################################################
 # Title         : doxy_gen_and_deploy.sh
-# Date modified : 2018/01/14
+# Date modified : 2019/05/22
 # Notes         :
-__AUTHOR__="Jeroen de Bruijn, modified by ladyada"
+__AUTHOR__="PHP Embedded Systems LTD. Andrzej Pichliński"
 # Preconditions:
 # - Doxygen configuration file must have the destination directory empty and
 #   source code directory with a $(TRAVIS_BUILD_DIR) prefix.
